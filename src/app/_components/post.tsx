@@ -5,24 +5,29 @@ import { useState } from "react";
 import { api } from "@/trpc/react";
 
 export function LatestPost() {
-  const [latestPost] = api.post.getLatest.useSuspenseQuery();
+  const [data] = api.post.getPosts.useSuspenseQuery();
 
   const utils = api.useUtils();
+  const [message, setMessage] = useState<string | undefined>();
   const [name, setName] = useState("");
   const createPost = api.post.create.useMutation({
-    onSuccess: async () => {
+    onSuccess: async (restult) => {
       await utils.post.invalidate();
       setName("");
+      setMessage(restult.message);
     },
   });
 
   return (
     <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
+      <p>{data.duration.toFixed(0)}ms</p>
+      <ul>
+        {data.posts.map((post) => (
+          <li key={post.id} className="border-b border-white/10 py-2">
+            {post.name}
+          </li>
+        ))}
+      </ul>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -45,6 +50,7 @@ export function LatestPost() {
           {createPost.isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
+      {message && <p className="mt-4 text-green-500">{message}</p>}
     </div>
   );
 }

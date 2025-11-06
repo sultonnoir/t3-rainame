@@ -15,24 +15,33 @@ export const postRouter = createTRPCRouter({
       };
     }),
 
-  create: protectedProcedure
+  create: publicProcedure
     .input(z.object({ name: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.post.create({
+      const start = performance.now();
+      const newPost = await ctx.db.posts.create({
         data: {
           name: input.name,
-          createdBy: { connect: { id: ctx.session.user.id } },
+          id: Date.now().toString(),
         },
       });
+      const end = performance.now();
+      return {
+        message: `Post "${newPost.name}" added in ${(end - start).toFixed(0)}ms`,
+      };
     }),
 
-  getLatest: protectedProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.post.findFirst({
+  getPosts: publicProcedure.query(async ({ ctx }) => {
+    const start = Date.now();
+    const posts = await ctx.db.posts.findMany({
       orderBy: { createdAt: "desc" },
-      where: { createdBy: { id: ctx.session.user.id } },
+      take: 5,
     });
-
-    return post ?? null;
+    const end = Date.now();
+    return {
+      posts,
+      duration: end - start,
+    };
   }),
 
   getSecretMessage: protectedProcedure.query(() => {
