@@ -1,22 +1,19 @@
 "use client";
 
-import { useState } from "react";
-
 import { api } from "@/trpc/react";
 
 export function LatestPost() {
-  const [data] = api.post.getPosts.useSuspenseQuery();
+  const { data, isLoading } = api.post.getPosts.useQuery();
 
-  const utils = api.useUtils();
-  const [message, setMessage] = useState<string | undefined>();
-  const [name, setName] = useState("");
-  const createPost = api.post.create.useMutation({
-    onSuccess: async (restult) => {
-      await utils.post.invalidate();
-      setName("");
-      setMessage(restult.message);
-    },
-  });
+  if (isLoading)
+    return (
+      <div className="w-full max-w-xs animate-pulse space-y-2">
+        <div className="h-8 w-1/4 rounded bg-white/10" />
+        <div className="h-8 w-5/6 rounded bg-white/10" />
+        <div className="h-8 w-1/2 rounded bg-white/10" />
+      </div>
+    );
+  if (!data) return <div>No posts found.</div>;
 
   return (
     <div className="w-full max-w-xs">
@@ -28,29 +25,6 @@ export function LatestPost() {
           </li>
         ))}
       </ul>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          createPost.mutate({ name });
-        }}
-        className="flex flex-col gap-2"
-      >
-        <input
-          type="text"
-          placeholder="Title"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-full bg-white/10 px-4 py-2 text-white"
-        />
-        <button
-          type="submit"
-          className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-          disabled={createPost.isPending}
-        >
-          {createPost.isPending ? "Submitting..." : "Submit"}
-        </button>
-      </form>
-      {message && <p className="mt-4 text-green-500">{message}</p>}
     </div>
   );
 }

@@ -2,10 +2,10 @@ import Link from "next/link";
 
 import { LatestPost } from "@/app/_components/post";
 import { api, HydrateClient } from "@/trpc/server";
+import { FormPost } from "./_components/form-post";
 
 export default async function Home() {
   const hello = await api.post.hello({ text: "from tRPC" });
-  void api.post.getPosts.prefetch();
 
   return (
     <HydrateClient>
@@ -45,6 +45,7 @@ export default async function Home() {
           </div>
 
           <LatestPost />
+          <FormPost />
         </div>
       </main>
     </HydrateClient>
