@@ -377,7 +377,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/sultonoir/t3-rainame/generated/prisma",
+      "value": "D:\\project\\t3-rainame\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -386,12 +386,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/sultonoir/t3-rainame/prisma/schema.prisma",
+    "sourceFilePath": "D:\\project\\t3-rainame\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

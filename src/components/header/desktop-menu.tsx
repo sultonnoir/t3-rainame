@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import type { Categories } from "@/server/api/routers/category/category-schema";
+import type { Categories } from "@/server/api/category/category-schema";
 
 interface DesktopMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   categories: Categories[];

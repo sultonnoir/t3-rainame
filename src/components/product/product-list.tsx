@@ -2,7 +2,7 @@
 
 import { api } from "@/trpc/react";
 import ProductCard from "./product-card";
-import type { SortBy } from "@/server/api/routers/products/product-schema";
+import type { SortBy } from "@/server/api/product/product-schema";
 
 interface ProductListProps extends React.HTMLAttributes<HTMLElement> {
   sortBy?: SortBy;
@@ -12,12 +12,12 @@ const ProductList = ({ sortBy }: ProductListProps) => {
   const [data] = api.product.getFilterProducts.useSuspenseQuery({
     sortBy,
     page: 1,
-    limit: 4,
+    limit: 8,
   });
 
   return (
     <>
-      {data.map((product) => (
+      {data.data.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </>

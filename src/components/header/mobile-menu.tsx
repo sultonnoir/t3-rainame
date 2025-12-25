@@ -16,7 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { Categories } from "@/server/api/routers/category/category-schema";
+import type { Categories } from "@/server/api/category/category-schema";
 
 interface MobileMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   categories: Categories[];

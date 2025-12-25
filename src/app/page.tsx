@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { HydrateClient } from "@/trpc/server";
 import { HomeHero } from "@/components/home/home-hero";
 import HomeProduct from "@/components/home/home-products";

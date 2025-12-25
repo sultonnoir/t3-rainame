@@ -4,15 +4,20 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import type { FunctionComponent } from "react";
 import { Card } from "@/components/ui/card";
-import type { ProductWithMedia } from "@/server/api/routers/products/product-schema";
+import type { ProductWithMedia } from "@/server/api/product/product-schema";
+import Link from "next/link";
 interface ProductCardProps {
   product: ProductWithMedia;
 }
 
 const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
   return (
-    <Card className="p-4">
-      <div className="relative flex flex-col gap-4 overflow-hidden">
+    <Card className="gap-2 p-4">
+      <Link
+        href={`/products/${product.slug}`}
+        prefetch={true}
+        className="relative flex flex-col gap-4 overflow-hidden"
+      >
         <div className="rounded-ele relative aspect-square w-full overflow-hidden pb-4">
           <Image
             alt="Wireless Bluetooth Headphones"
@@ -51,12 +56,12 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
                 </span>
               </div>{" "}
             </div>
-            <h3 className="ext-sm line-clamp-2 leading-tight font-semibold transition-colors duration-200 sm:text-base">
+            <h3 className="ext-sm line-clamp-2 truncate leading-tight font-semibold transition-colors duration-200 sm:text-base">
               {product.name}
             </h3>
           </div>
         </div>
-      </div>
+      </Link>
       <div className="flex w-full grow flex-col justify-end">
         <div className="items-left flex w-full flex-col justify-between gap-3">
           <div className="flex items-baseline gap-2">

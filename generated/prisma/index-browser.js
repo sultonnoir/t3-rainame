@@ -7,7 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
   Decimal,
-  objectEnumValues,
+  DbNull,
+  JsonNull,
+  AnyNull,
+  NullTypes,
   makeStrictEnum,
   Public,
   getRuntime,
@@ -21,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.19.0
- * Query Engine version: 2ba551f319ab1df4bc874a89965d8b3641056773
+ * Prisma Client JS version: 7.2.0
+ * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
  */
 Prisma.prismaVersion = {
-  client: "6.19.0",
-  engine: "2ba551f319ab1df4bc874a89965d8b3641056773"
+  client: "7.2.0",
+  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -98,15 +101,11 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
 /**
  * Shorthand utilities for JSON filtering
  */
-Prisma.DbNull = objectEnumValues.instances.DbNull
-Prisma.JsonNull = objectEnumValues.instances.JsonNull
-Prisma.AnyNull = objectEnumValues.instances.AnyNull
+Prisma.DbNull = DbNull
+Prisma.JsonNull = JsonNull
+Prisma.AnyNull = AnyNull
 
-Prisma.NullTypes = {
-  DbNull: objectEnumValues.classes.DbNull,
-  JsonNull: objectEnumValues.classes.JsonNull,
-  AnyNull: objectEnumValues.classes.AnyNull
-}
+Prisma.NullTypes = NullTypes
 
 
 
@@ -293,6 +292,22 @@ exports.Prisma.ProductScalarFieldEnum = {
   selling: 'selling'
 };
 
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  quatity: 'quatity',
+  size: 'size',
+  userId: 'userId',
+  created_at: 'created_at'
+};
+
+exports.Prisma.WishlistScalarFieldEnum = {
+  id: 'id',
+  creted_at: 'creted_at',
+  productId: 'productId',
+  userId: 'userId'
+};
+
 exports.Prisma.Product_analyticScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
@@ -386,6 +401,8 @@ exports.Prisma.ModelName = {
   notifiRead: 'notifiRead',
   posts: 'posts',
   product: 'product',
+  cart: 'cart',
+  Wishlist: 'Wishlist',
   product_analytic: 'product_analytic',
   product_variant: 'product_variant',
   promo: 'promo',

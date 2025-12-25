@@ -2,7 +2,7 @@ import ProductSkeleton from "../product/product-skeleton";
 import { Suspense, type FunctionComponent } from "react";
 import { cn } from "@/lib/utils";
 import ProductList from "../product/product-list";
-import type { SortBy } from "@/server/api/routers/products/product-schema";
+import type { SortBy } from "@/server/api/product/product-schema";
 import { api } from "@/trpc/server";
 
 interface HomeProductProps extends React.HTMLAttributes<HTMLElement> {
