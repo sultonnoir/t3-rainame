@@ -19,7 +19,8 @@ import { api } from "@/trpc/react";
 import EmptyCart from "./cart-empty";
 import CartSkeleton from "./cart-skeleton";
 import CartCard from "./cart-card";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const CartSidebar = () => {
   const path = usePathname();
@@ -41,6 +42,19 @@ const CartSidebar = () => {
 
     return { count, totalPrice, hasOutOfStock };
   }, [items]);
+
+  const router = useRouter();
+  const { isPending, mutate } = api.checkout.creat.useMutation({
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onSuccess: (data) => {
+      router.push(`/checkout?session=${data}`);
+    },
+  });
+  const handleCheckout = () => {
+    mutate();
+  };
 
   if (path.startsWith("/checkout")) {
     return null;
@@ -98,7 +112,7 @@ const CartSidebar = () => {
         {!isLoading && !isError && items.length > 0 && (
           <div className="flex-col space-y-4 overflow-auto pl-3">
             {items.map((item) => (
-              <CartCard item={item} key={item.id} isAggregate={false} />
+              <CartCard item={item} key={item.id} isAggregate={true} />
             ))}
           </div>
         )}
@@ -106,15 +120,16 @@ const CartSidebar = () => {
         {/* Footer */}
         <SheetFooter className="mt-auto gap-3">
           <div className="flex w-full items-center justify-between text-sm">
-            <span>Total</span>
+            <span>Subtotal</span>
             <span className="font-semibold">${totalPrice.toFixed(2)}</span>
           </div>
 
           <Button
             className="w-full"
-            disabled={items.length === 0 || hasOutOfStock}
+            disabled={items.length === 0 || hasOutOfStock || isPending}
+            onClick={handleCheckout}
           >
-            Go to cart page
+            Checkout
           </Button>
 
           {hasOutOfStock && (

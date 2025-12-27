@@ -1,11 +1,25 @@
 import { db } from "@/server/db";
 import type { CreateCartInput, DeleteCartInput } from "./cart-schema";
+import { TRPCError } from "@trpc/server";
 
 export class CartService {
   async createCart(input: CreateCartInput) {
     const { userId, productId, size, quantity } = input;
-    await db.$transaction([
-      db.cart.upsert({
+    await db.$transaction(async (tx) => {
+      const stock = await tx.productVariant.findFirst({
+        where: {
+          productId: input.productId,
+          name: input.size,
+        },
+      });
+
+      if (stock?.amount === 0) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "product is empty",
+        });
+      }
+      await tx.cart.upsert({
         where: {
           userId_productId_size: {
             userId,
@@ -14,7 +28,7 @@ export class CartService {
           },
         },
         update: {
-          quantity: { increment: quantity },
+          quantity,
         },
         create: {
           userId,
@@ -22,8 +36,8 @@ export class CartService {
           size,
           quantity,
         },
-      }),
-    ]);
+      });
+    });
   }
   async getCartCount(userId?: string) {
     if (!userId) return 0;

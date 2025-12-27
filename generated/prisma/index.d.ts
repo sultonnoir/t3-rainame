@@ -10415,6 +10415,7 @@ export namespace Prisma {
     status: string | null
     userId: string | null
     quantity: number | null
+    expiresAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10425,6 +10426,7 @@ export namespace Prisma {
     status: string | null
     userId: string | null
     quantity: number | null
+    expiresAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -10435,6 +10437,7 @@ export namespace Prisma {
     status: number
     userId: number
     quantity: number
+    expiresAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -10457,6 +10460,7 @@ export namespace Prisma {
     status?: true
     userId?: true
     quantity?: true
+    expiresAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10467,6 +10471,7 @@ export namespace Prisma {
     status?: true
     userId?: true
     quantity?: true
+    expiresAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -10477,6 +10482,7 @@ export namespace Prisma {
     status?: true
     userId?: true
     quantity?: true
+    expiresAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -10572,8 +10578,9 @@ export namespace Prisma {
     id: string
     price: number
     status: string
-    userId: string | null
+    userId: string
     quantity: number
+    expiresAt: Date
     createdAt: Date
     updatedAt: Date
     _count: CheckoutCountAggregateOutputType | null
@@ -10603,9 +10610,10 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     quantity?: boolean
+    expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Checkout$userArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     checkoutItems?: boolean | Checkout$checkoutItemsArgs<ExtArgs>
     notifies?: boolean | Checkout$notifiesArgs<ExtArgs>
     _count?: boolean | CheckoutCountOutputTypeDefaultArgs<ExtArgs>
@@ -10617,9 +10625,10 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     quantity?: boolean
+    expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Checkout$userArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["checkout"]>
 
   export type CheckoutSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10628,9 +10637,10 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     quantity?: boolean
+    expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | Checkout$userArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["checkout"]>
 
   export type CheckoutSelectScalar = {
@@ -10639,28 +10649,29 @@ export namespace Prisma {
     status?: boolean
     userId?: boolean
     quantity?: boolean
+    expiresAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CheckoutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "price" | "status" | "userId" | "quantity" | "createdAt" | "updatedAt", ExtArgs["result"]["checkout"]>
+  export type CheckoutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "price" | "status" | "userId" | "quantity" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["checkout"]>
   export type CheckoutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Checkout$userArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     checkoutItems?: boolean | Checkout$checkoutItemsArgs<ExtArgs>
     notifies?: boolean | Checkout$notifiesArgs<ExtArgs>
     _count?: boolean | CheckoutCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CheckoutIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Checkout$userArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type CheckoutIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | Checkout$userArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $CheckoutPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Checkout"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs>
       checkoutItems: Prisma.$CheckoutItemPayload<ExtArgs>[]
       notifies: Prisma.$NotifiPayload<ExtArgs>[]
     }
@@ -10668,8 +10679,9 @@ export namespace Prisma {
       id: string
       price: number
       status: string
-      userId: string | null
+      userId: string
       quantity: number
+      expiresAt: Date
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["checkout"]>
@@ -11066,7 +11078,7 @@ export namespace Prisma {
    */
   export interface Prisma__CheckoutClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends Checkout$userArgs<ExtArgs> = {}>(args?: Subset<T, Checkout$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     checkoutItems<T extends Checkout$checkoutItemsArgs<ExtArgs> = {}>(args?: Subset<T, Checkout$checkoutItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CheckoutItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifies<T extends Checkout$notifiesArgs<ExtArgs> = {}>(args?: Subset<T, Checkout$notifiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotifiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -11103,6 +11115,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Checkout", 'String'>
     readonly userId: FieldRef<"Checkout", 'String'>
     readonly quantity: FieldRef<"Checkout", 'Int'>
+    readonly expiresAt: FieldRef<"Checkout", 'DateTime'>
     readonly createdAt: FieldRef<"Checkout", 'DateTime'>
     readonly updatedAt: FieldRef<"Checkout", 'DateTime'>
   }
@@ -11498,25 +11511,6 @@ export namespace Prisma {
      * Limit how many Checkouts to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Checkout.user
-   */
-  export type Checkout$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
   }
 
   /**
@@ -31649,6 +31643,7 @@ export namespace Prisma {
     status: 'status',
     userId: 'userId',
     quantity: 'quantity',
+    expiresAt: 'expiresAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -32450,11 +32445,12 @@ export namespace Prisma {
     id?: StringFilter<"Checkout"> | string
     price?: FloatFilter<"Checkout"> | number
     status?: StringFilter<"Checkout"> | string
-    userId?: StringNullableFilter<"Checkout"> | string | null
+    userId?: StringFilter<"Checkout"> | string
     quantity?: IntFilter<"Checkout"> | number
+    expiresAt?: DateTimeFilter<"Checkout"> | Date | string
     createdAt?: DateTimeFilter<"Checkout"> | Date | string
     updatedAt?: DateTimeFilter<"Checkout"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     checkoutItems?: CheckoutItemListRelationFilter
     notifies?: NotifiListRelationFilter
   }
@@ -32463,8 +32459,9 @@ export namespace Prisma {
     id?: SortOrder
     price?: SortOrder
     status?: SortOrder
-    userId?: SortOrderInput | SortOrder
+    userId?: SortOrder
     quantity?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -32479,11 +32476,12 @@ export namespace Prisma {
     NOT?: CheckoutWhereInput | CheckoutWhereInput[]
     price?: FloatFilter<"Checkout"> | number
     status?: StringFilter<"Checkout"> | string
-    userId?: StringNullableFilter<"Checkout"> | string | null
+    userId?: StringFilter<"Checkout"> | string
     quantity?: IntFilter<"Checkout"> | number
+    expiresAt?: DateTimeFilter<"Checkout"> | Date | string
     createdAt?: DateTimeFilter<"Checkout"> | Date | string
     updatedAt?: DateTimeFilter<"Checkout"> | Date | string
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     checkoutItems?: CheckoutItemListRelationFilter
     notifies?: NotifiListRelationFilter
   }, "id">
@@ -32492,8 +32490,9 @@ export namespace Prisma {
     id?: SortOrder
     price?: SortOrder
     status?: SortOrder
-    userId?: SortOrderInput | SortOrder
+    userId?: SortOrder
     quantity?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CheckoutCountOrderByAggregateInput
@@ -32510,8 +32509,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Checkout"> | string
     price?: FloatWithAggregatesFilter<"Checkout"> | number
     status?: StringWithAggregatesFilter<"Checkout"> | string
-    userId?: StringNullableWithAggregatesFilter<"Checkout"> | string | null
+    userId?: StringWithAggregatesFilter<"Checkout"> | string
     quantity?: IntWithAggregatesFilter<"Checkout"> | number
+    expiresAt?: DateTimeWithAggregatesFilter<"Checkout"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Checkout"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Checkout"> | Date | string
   }
@@ -34242,9 +34242,10 @@ export namespace Prisma {
     price: number
     status?: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutCheckoutsInput
+    user: UserCreateNestedOneWithoutCheckoutsInput
     checkoutItems?: CheckoutItemCreateNestedManyWithoutCheckoutInput
     notifies?: NotifiCreateNestedManyWithoutCheckoutInput
   }
@@ -34253,8 +34254,9 @@ export namespace Prisma {
     id?: string
     price: number
     status?: string
-    userId?: string | null
+    userId: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     checkoutItems?: CheckoutItemUncheckedCreateNestedManyWithoutCheckoutInput
@@ -34266,9 +34268,10 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutCheckoutsNestedInput
+    user?: UserUpdateOneRequiredWithoutCheckoutsNestedInput
     checkoutItems?: CheckoutItemUpdateManyWithoutCheckoutNestedInput
     notifies?: NotifiUpdateManyWithoutCheckoutNestedInput
   }
@@ -34277,8 +34280,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkoutItems?: CheckoutItemUncheckedUpdateManyWithoutCheckoutNestedInput
@@ -34289,8 +34293,9 @@ export namespace Prisma {
     id?: string
     price: number
     status?: string
-    userId?: string | null
+    userId: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -34300,6 +34305,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34308,8 +34314,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36087,6 +36094,7 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     quantity?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -36102,6 +36110,7 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     quantity?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -36112,6 +36121,7 @@ export namespace Prisma {
     status?: SortOrder
     userId?: SortOrder
     quantity?: SortOrder
+    expiresAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -37506,12 +37516,10 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserUpdateOneWithoutCheckoutsNestedInput = {
+  export type UserUpdateOneRequiredWithoutCheckoutsNestedInput = {
     create?: XOR<UserCreateWithoutCheckoutsInput, UserUncheckedCreateWithoutCheckoutsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCheckoutsInput
     upsert?: UserUpsertWithoutCheckoutsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCheckoutsInput, UserUpdateWithoutCheckoutsInput>, UserUncheckedUpdateWithoutCheckoutsInput>
   }
@@ -38673,6 +38681,7 @@ export namespace Prisma {
     price: number
     status?: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     checkoutItems?: CheckoutItemCreateNestedManyWithoutCheckoutInput
@@ -38684,6 +38693,7 @@ export namespace Prisma {
     price: number
     status?: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     checkoutItems?: CheckoutItemUncheckedCreateNestedManyWithoutCheckoutInput
@@ -38976,8 +38986,9 @@ export namespace Prisma {
     id?: StringFilter<"Checkout"> | string
     price?: FloatFilter<"Checkout"> | number
     status?: StringFilter<"Checkout"> | string
-    userId?: StringNullableFilter<"Checkout"> | string | null
+    userId?: StringFilter<"Checkout"> | string
     quantity?: IntFilter<"Checkout"> | number
+    expiresAt?: DateTimeFilter<"Checkout"> | Date | string
     createdAt?: DateTimeFilter<"Checkout"> | Date | string
     updatedAt?: DateTimeFilter<"Checkout"> | Date | string
   }
@@ -39893,9 +39904,10 @@ export namespace Prisma {
     price: number
     status?: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutCheckoutsInput
+    user: UserCreateNestedOneWithoutCheckoutsInput
     notifies?: NotifiCreateNestedManyWithoutCheckoutInput
   }
 
@@ -39903,8 +39915,9 @@ export namespace Prisma {
     id?: string
     price: number
     status?: string
-    userId?: string | null
+    userId: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     notifies?: NotifiUncheckedCreateNestedManyWithoutCheckoutInput
@@ -39986,9 +39999,10 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutCheckoutsNestedInput
+    user?: UserUpdateOneRequiredWithoutCheckoutsNestedInput
     notifies?: NotifiUpdateManyWithoutCheckoutNestedInput
   }
 
@@ -39996,8 +40010,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notifies?: NotifiUncheckedUpdateManyWithoutCheckoutNestedInput
@@ -40639,9 +40654,10 @@ export namespace Prisma {
     price: number
     status?: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutCheckoutsInput
+    user: UserCreateNestedOneWithoutCheckoutsInput
     checkoutItems?: CheckoutItemCreateNestedManyWithoutCheckoutInput
   }
 
@@ -40649,8 +40665,9 @@ export namespace Prisma {
     id?: string
     price: number
     status?: string
-    userId?: string | null
+    userId: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     checkoutItems?: CheckoutItemUncheckedCreateNestedManyWithoutCheckoutInput
@@ -40758,9 +40775,10 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutCheckoutsNestedInput
+    user?: UserUpdateOneRequiredWithoutCheckoutsNestedInput
     checkoutItems?: CheckoutItemUpdateManyWithoutCheckoutNestedInput
   }
 
@@ -40768,8 +40786,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkoutItems?: CheckoutItemUncheckedUpdateManyWithoutCheckoutNestedInput
@@ -42512,6 +42531,7 @@ export namespace Prisma {
     price: number
     status?: string
     quantity: number
+    expiresAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42614,6 +42634,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkoutItems?: CheckoutItemUpdateManyWithoutCheckoutNestedInput
@@ -42625,6 +42646,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkoutItems?: CheckoutItemUncheckedUpdateManyWithoutCheckoutNestedInput
@@ -42636,6 +42658,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -196,6 +196,7 @@ exports.Prisma.CheckoutScalarFieldEnum = {
   status: 'status',
   userId: 'userId',
   quantity: 'quantity',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

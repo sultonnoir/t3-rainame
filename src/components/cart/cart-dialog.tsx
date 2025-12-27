@@ -47,10 +47,12 @@ export default function CartDialog({
   const { isPending, mutate } = api.cart.create.useMutation({
     onError: (error) => {
       toast.error(error.message);
+      return;
     },
     onSuccess: async () => {
-      await util.cart.getCount.invalidate();
+      await util.cart.getItems.invalidate();
       toast.success("Product added to cart!");
+      setOpen(false);
     },
   });
 

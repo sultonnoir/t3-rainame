@@ -1,24 +1,25 @@
 "use client";
 
 import type { CartLists } from "@/server/api/cart/cart-schema";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type HtmlHTMLAttributes } from "react";
 import Link from "next/link";
-import { XIcon } from "lucide-react";
+import { MinusIcon, PlusIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Image } from "@unpic/react/nextjs";
 import { blurhashToDataUri } from "@unpic/placeholder";
-
+import NumberFlow from "@number-flow/react";
 import { Button } from "../ui/button";
-import QuantityInputBasic from "../ui/quantity-input-basic";
 import { api } from "@/trpc/react";
 import { useDebounce } from "@/hooks/use-debounce";
+import { cn } from "@/lib/utils";
 
-type Props = {
+interface Props extends HtmlHTMLAttributes<HTMLDivElement> {
   item: CartLists;
   isAggregate: boolean;
-};
+}
 
-const CartCard = ({ item, isAggregate }: Props) => {
+const CartCard = ({ item, isAggregate, className }: Props) => {
+  const maxAllowedAmount = item.product.stock;
   const utils = api.useUtils();
 
   /* ---------------- quantity state ---------------- */
@@ -42,24 +43,36 @@ const CartCard = ({ item, isAggregate }: Props) => {
       setQuantity(item.quantity); // rollback UI
     },
   });
+  const increment = () => {
+    setQuantity((prevCount) => prevCount + 1);
+  };
+
+  const decrement = () => {
+    setQuantity((prevCount) => (prevCount > 1 ? prevCount - 1 : prevCount));
+  };
 
   /* ---------------- side effect (debounce → mutation) ---------------- */
+  const [lastUpdatedQuantity, setLastUpdatedQuantity] = useState(item.quantity);
+
   useEffect(() => {
-    if (debouncedQuantity === item.quantity) return;
+    if (debouncedQuantity === lastUpdatedQuantity) return;
     if (debouncedQuantity < 1) return;
     if (debouncedQuantity > item.product.stock) return;
 
     updateQuantity.mutate({
       productId: item.product.id,
       quantity: debouncedQuantity,
+      size: item.size,
     });
+
+    setLastUpdatedQuantity(debouncedQuantity);
   }, [
     debouncedQuantity,
-    item.id,
-    item.quantity,
-    item.product.stock,
-    updateQuantity,
     item.product.id,
+    item.product.stock,
+    item.size,
+    lastUpdatedQuantity,
+    updateQuantity,
   ]);
 
   /* ---------------- derived state ---------------- */
@@ -68,7 +81,7 @@ const CartCard = ({ item, isAggregate }: Props) => {
 
   /* ---------------- render ---------------- */
   return (
-    <div className="flex max-w-xs gap-3">
+    <div className={cn("flex max-w-xs gap-3", className)}>
       <Link href={`/products/${item.product.slug}`}>
         <Image
           src={item.product.media.url}
@@ -125,13 +138,34 @@ const CartCard = ({ item, isAggregate }: Props) => {
 
         {/* quantity input */}
         {isAggregate && (
-          <QuantityInputBasic
-            quantity={quantity}
-            min={1}
-            max={item.product.stock}
-            onChange={setQuantity}
-            disabled={updateQuantity.isPending}
-          />
+          <div className="bg-muted dark:bg-muted/50 mt-auto flex w-fit gap-3 rounded-lg p-1">
+            <Button
+              className="size-6 disabled:cursor-not-allowed"
+              onClick={decrement}
+              disabled={quantity === 1}
+              variant="ghost"
+              size="icon"
+            >
+              <MinusIcon className="size-4" />
+            </Button>
+            <NumberFlow
+              value={quantity}
+              format={{ useGrouping: false }}
+              aria-hidden
+              animated={true}
+              className="pointer-events-none"
+              willChange
+            />
+            <Button
+              onClick={increment}
+              className="size-6"
+              disabled={quantity >= maxAllowedAmount}
+              variant="ghost"
+              size="icon"
+            >
+              <PlusIcon className="size-4" />
+            </Button>
+          </div>
         )}
       </div>
     </div>
