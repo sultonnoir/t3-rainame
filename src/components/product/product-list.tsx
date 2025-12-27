@@ -1,23 +1,19 @@
 "use client";
 
-import { api } from "@/trpc/react";
 import ProductCard from "./product-card";
-import type { SortBy } from "@/server/api/product/product-schema";
+import type { ProductWithMedia } from "@/server/api/product/product-schema";
+import { use } from "react";
 
 interface ProductListProps extends React.HTMLAttributes<HTMLElement> {
-  sortBy?: SortBy;
+  initialProducts: Promise<ProductWithMedia[]>;
 }
 
-const ProductList = ({ sortBy }: ProductListProps) => {
-  const [data] = api.product.getFilterProducts.useSuspenseQuery({
-    sortBy,
-    page: 1,
-    limit: 8,
-  });
+const ProductList = ({ initialProducts }: ProductListProps) => {
+  const products = use(initialProducts);
 
   return (
     <>
-      {data.data.map((product) => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </>

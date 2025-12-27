@@ -4,7 +4,7 @@ import type { Prisma } from "generated/prisma";
 
 export class ProductService {
   async filterProduct(filters: ProductFilter, userId?: string) {
-    const andConditions: Prisma.productWhereInput[] = [];
+    const andConditions: Prisma.ProductWhereInput[] = [];
 
     // 🔍 Search
     if (filters.search) {
@@ -27,7 +27,7 @@ export class ProductService {
 
     if (filters.minPrice || filters.maxPrice) {
       andConditions.push({
-        discounted_price: {
+        discountedPrice: {
           gte: filters.minPrice,
           lte: filters.maxPrice,
         },
@@ -36,7 +36,7 @@ export class ProductService {
 
     if (filters.rating) {
       andConditions.push({
-        rating_average: { gte: filters.rating },
+        ratingAverage: { gte: filters.rating },
       });
     }
 
@@ -46,7 +46,7 @@ export class ProductService {
       });
     }
 
-    const where: Prisma.productWhereInput = {
+    const where: Prisma.ProductWhereInput = {
       AND: andConditions.length ? andConditions : undefined,
     };
 
@@ -54,10 +54,10 @@ export class ProductService {
     const limit = Math.min(filters.limit ?? 20, 50);
     const skip = (page - 1) * limit;
 
-    const orderByMap: Record<string, Prisma.productOrderByWithRelationInput> = {
-      "price-high": { discounted_price: "desc" },
-      "price-low": { discounted_price: "asc" },
-      rating: { rating_average: "desc" },
+    const orderByMap: Record<string, Prisma.ProductOrderByWithRelationInput> = {
+      "price-high": { discountedPrice: "desc" },
+      "price-low": { discountedPrice: "asc" },
+      rating: { ratingAverage: "desc" },
       "hot-sale": { selling: "desc" },
       "new-arrival": { createdAt: "desc" },
     };
@@ -103,5 +103,50 @@ export class ProductService {
         totalPages: Math.ceil(total / limit),
       },
     };
+  }
+  async homeProduct(filters: ProductFilter, userId?: string) {
+    const page = Math.max(filters.page ?? 1, 1);
+    const limit = Math.min(filters.limit ?? 20, 50);
+    const skip = (page - 1) * limit;
+
+    const orderByMap: Record<string, Prisma.ProductOrderByWithRelationInput> = {
+      "price-high": { discountedPrice: "desc" },
+      "price-low": { discountedPrice: "asc" },
+      rating: { ratingAverage: "desc" },
+      "hot-sale": { selling: "desc" },
+      "new-arrival": { createdAt: "desc" },
+    };
+
+    const orderBy = orderByMap[filters.sortBy ?? ""] ?? { createdAt: "desc" };
+
+    const items = await db.product.findMany({
+      orderBy,
+      skip,
+      take: limit,
+      include: {
+        media: {
+          take: 1,
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+        _count: userId
+          ? {
+              select: {
+                wishlist: {
+                  where: { userId },
+                },
+              },
+            }
+          : undefined,
+      },
+    });
+
+    const products = items.map((product) => ({
+      ...product,
+      isWishlisted: userId ? product._count?.wishlist > 0 : false,
+    }));
+
+    return products;
   }
 }

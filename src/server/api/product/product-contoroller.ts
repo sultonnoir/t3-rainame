@@ -10,4 +10,9 @@ export const productRouter = createTRPCRouter({
     .query(async ({ input, ctx }) => {
       return await productService.filterProduct(input, ctx.session?.user.id);
     }),
+  getHomeProducts: publicProcedure
+    .input(productFilterSchema)
+    .query(async ({ input, ctx }) => {
+      return await productService.homeProduct(input, ctx.session?.user.id);
+    }),
 });

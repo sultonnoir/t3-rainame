@@ -56,7 +56,7 @@ export const HomeHero = () => {
       <div className="relative grid grid-cols-2 gap-4 p-4 sm:p-6 lg:p-8">
         <div className="relative aspect-3/4">
           <Image
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80"
+            src="/hero-1.avif"
             alt="Fashion model in winter coat"
             className="absolute inset-0 h-full w-full rounded-xl object-cover"
             width={370}
@@ -68,7 +68,7 @@ export const HomeHero = () => {
         </div>
         <div className="relative mt-12 aspect-3/4">
           <Image
-            src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=800&q=80"
+            src="/hero-2.avif"
             alt="Fashion model in summer dress"
             className="absolute inset-0 h-full w-full rounded-xl object-cover"
             layout="constrained"

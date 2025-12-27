@@ -17,7 +17,7 @@ const HomeProduct: FunctionComponent<HomeProductProps> = ({
   sortBy,
   className,
 }) => {
-  void api.product.getFilterProducts.prefetch({ sortBy, page: 1, limit: 4 });
+  const data = api.product.getHomeProducts({ sortBy, page: 1, limit: 8 });
   return (
     <section className={cn("py-12 md:py-16", className)} id="home-products">
       <div className={`container`}>
@@ -35,8 +35,8 @@ const HomeProduct: FunctionComponent<HomeProductProps> = ({
           </p>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <Suspense fallback={<ProductSkeleton length={6} />}>
-            <ProductList sortBy={sortBy} />
+          <Suspense fallback={<ProductSkeleton length={8} />}>
+            <ProductList initialProducts={data} />
           </Suspense>
         </div>
       </div>

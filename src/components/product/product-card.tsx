@@ -49,10 +49,10 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
                   <Star className="fill-amber-400 stroke-amber-400" size={16} />
                 </div>
                 <span className="text-sm font-semibold">
-                  {product.rating_average.toFixed(1)}
+                  {product.ratingAverage.toFixed(1)}
                 </span>
                 <span className="text-muted-foreground text-xs">
-                  ({product.rating_count})
+                  ({product.ratingCount})
                 </span>
               </div>{" "}
             </div>
@@ -66,11 +66,11 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
         <div className="items-left flex w-full flex-col justify-between gap-3">
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-bold sm:text-xl">
-              ${product.discounted_price}
+              ${product.discountedPrice}
             </span>
             {product.discount > 0 && (
               <span className="text-muted-foreground text-sm line-through">
-                ${product.normal_price}
+                ${product.normalPrice}
               </span>
             )}
           </div>

@@ -4,7 +4,7 @@ export class CategoryService {
   async list() {
     return db.category.findMany({
       include: {
-        subcategory: true,
+        subcategories: true,
       },
     });
   }

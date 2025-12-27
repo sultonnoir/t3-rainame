@@ -27,7 +27,7 @@ export const DesktopMenu = ({ className, categories }: DesktopMenuProps) => {
               {category.name}
             </NavigationMenuTrigger>
             <NavigationMenuContent className="bg-background">
-              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-max lg:grid-cols-2">
+              <ul className="grid gap-3 p-6 md:w-100 lg:w-max lg:grid-cols-2">
                 <li className="col-span-1">
                   <NavigationMenuLink asChild>
                     <Link
@@ -44,7 +44,7 @@ export const DesktopMenu = ({ className, categories }: DesktopMenuProps) => {
                   </NavigationMenuLink>
                 </li>
                 <li className="col-span-1 grid grid-cols-1">
-                  {category.subcategory.map((sub) => (
+                  {category.subcategories.map((sub) => (
                     <NavigationMenuLink asChild key={sub.id}>
                       <Link
                         href={`/collections/${category.slug}/${sub.slug}`}

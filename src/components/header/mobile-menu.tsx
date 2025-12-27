@@ -61,7 +61,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
                 </AccordionTrigger>
                 <AccordionContent className="space-y-1">
                   <ul className="grid gap-1">
-                    {section.subcategory.map((link) => (
+                    {section.subcategories.map((link) => (
                       <li key={link.id}>
                         <SheetClose asChild>
                           <NavItemMobile

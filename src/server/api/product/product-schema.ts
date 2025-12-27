@@ -1,4 +1,4 @@
-import type { media, product } from "generated/prisma";
+import type { Media, Product } from "generated/prisma";
 import { z } from "zod";
 
 export const productFilterSchema = z.object({
@@ -31,7 +31,7 @@ export type ProductSortedSchema = z.infer<typeof productSortedSchema>;
 
 export type ProductFilter = z.infer<typeof productFilterSchema>;
 
-export type ProductWithMedia = product & {
-  media: media[];
+export type ProductWithMedia = Product & {
+  media: Media[];
   isWishlisted: boolean;
 };

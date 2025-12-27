@@ -1,5 +1,4 @@
 import { Search, ShoppingBag, UserIcon } from "lucide-react";
-
 import { DesktopMenu } from "./desktop-menu";
 import { MobileMenu } from "./mobile-menu";
 import { Button } from "@/components/ui/button";

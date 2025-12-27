@@ -124,60 +124,61 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  email_verified: 'email_verified',
   image: 'image',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
+  emailVerified: 'emailVerified',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  isAnonymous: 'isAnonymous',
   role: 'role',
   banned: 'banned',
-  ban_reason: 'ban_reason',
-  ban_expires: 'ban_expires',
-  image_blur: 'image_blur'
+  banReason: 'banReason',
+  banExpires: 'banExpires',
+  imageBlur: 'imageBlur'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
-  expires_at: 'expires_at',
-  token: 'token',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  ip_address: 'ip_address',
-  user_agent: 'user_agent',
-  user_id: 'user_id',
-  impersonated_by: 'impersonated_by'
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  userId: 'userId',
+  impersonatedBy: 'impersonatedBy',
+  token: 'token'
 };
 
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
-  account_id: 'account_id',
-  provider_id: 'provider_id',
-  user_id: 'user_id',
-  access_token: 'access_token',
-  refresh_token: 'refresh_token',
-  id_token: 'id_token',
-  access_token_expires_at: 'access_token_expires_at',
-  refresh_token_expires_at: 'refresh_token_expires_at',
+  accountId: 'accountId',
+  providerId: 'providerId',
+  userId: 'userId',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  idToken: 'idToken',
+  accessTokenExpiresAt: 'accessTokenExpiresAt',
+  refreshTokenExpiresAt: 'refreshTokenExpiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   scope: 'scope',
-  password: 'password',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  password: 'password'
 };
 
 exports.Prisma.VerificationScalarFieldEnum = {
   id: 'id',
   identifier: 'identifier',
   value: 'value',
-  expires_at: 'expires_at',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Buyer_analyticScalarFieldEnum = {
+exports.Prisma.BuyerAnalyticScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  created_at: 'created_at',
-  total_purchase: 'total_purchase',
-  total_spent: 'total_spent'
+  createdAt: 'createdAt',
+  totalPurchase: 'totalPurchase',
+  totalSpent: 'totalSpent'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -199,7 +200,7 @@ exports.Prisma.CheckoutScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Checkout_itemScalarFieldEnum = {
+exports.Prisma.CheckoutItemScalarFieldEnum = {
   id: 'id',
   quantity: 'quantity',
   price: 'price',
@@ -224,7 +225,7 @@ exports.Prisma.CouponScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Coupon_consumeScalarFieldEnum = {
+exports.Prisma.CouponConsumeScalarFieldEnum = {
   couponId: 'couponId',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -232,9 +233,9 @@ exports.Prisma.Coupon_consumeScalarFieldEnum = {
 };
 
 exports.Prisma.DetailsScalarFieldEnum = {
-  product_id: 'product_id',
-  category_id: 'category_id',
-  subcategory_id: 'subcategory_id'
+  productId: 'productId',
+  categoryId: 'categoryId',
+  subcategoryId: 'subcategoryId'
 };
 
 exports.Prisma.MediaScalarFieldEnum = {
@@ -282,42 +283,42 @@ exports.Prisma.ProductScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   desc: 'desc',
-  normal_price: 'normal_price',
+  normalPrice: 'normalPrice',
   discount: 'discount',
-  discounted_price: 'discounted_price',
+  discountedPrice: 'discountedPrice',
   category: 'category',
   subcategory: 'subcategory',
-  rating_average: 'rating_average',
-  rating_count: 'rating_count',
+  ratingAverage: 'ratingAverage',
+  ratingCount: 'ratingCount',
   selling: 'selling'
 };
 
 exports.Prisma.CartScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
-  quatity: 'quatity',
+  quantity: 'quantity',
   size: 'size',
   userId: 'userId',
-  created_at: 'created_at'
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.WishlistScalarFieldEnum = {
   id: 'id',
-  creted_at: 'creted_at',
+  createdAt: 'createdAt',
   productId: 'productId',
   userId: 'userId'
 };
 
-exports.Prisma.Product_analyticScalarFieldEnum = {
+exports.Prisma.ProductAnalyticScalarFieldEnum = {
   id: 'id',
   productId: 'productId',
-  created_at: 'created_at',
-  sold_count: 'sold_count',
-  failed_count: 'failed_count',
-  refund_count: 'refund_count'
+  createdAt: 'createdAt',
+  soldCount: 'soldCount',
+  failedCount: 'failedCount',
+  refundCount: 'refundCount'
 };
 
-exports.Prisma.Product_variantScalarFieldEnum = {
+exports.Prisma.ProductVariantScalarFieldEnum = {
   id: 'id',
   name: 'name',
   amount: 'amount',
@@ -337,7 +338,7 @@ exports.Prisma.PromoScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Promo_and_productScalarFieldEnum = {
+exports.Prisma.PromoAndProductScalarFieldEnum = {
   promoId: 'promoId',
   productId: 'productId'
 };
@@ -352,9 +353,9 @@ exports.Prisma.RatingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Revenue_analyticScalarFieldEnum = {
+exports.Prisma.RevenueAnalyticScalarFieldEnum = {
   id: 'id',
-  created_at: 'created_at',
+  createdAt: 'createdAt',
   revenue: 'revenue'
 };
 
@@ -389,27 +390,27 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  buyer_analytic: 'buyer_analytic',
-  category: 'category',
-  checkout: 'checkout',
-  checkout_item: 'checkout_item',
-  coupon: 'coupon',
-  coupon_consume: 'coupon_consume',
-  details: 'details',
-  media: 'media',
-  notifi: 'notifi',
-  notifiRead: 'notifiRead',
-  posts: 'posts',
-  product: 'product',
-  cart: 'cart',
+  BuyerAnalytic: 'BuyerAnalytic',
+  Category: 'Category',
+  Checkout: 'Checkout',
+  CheckoutItem: 'CheckoutItem',
+  Coupon: 'Coupon',
+  CouponConsume: 'CouponConsume',
+  Details: 'Details',
+  Media: 'Media',
+  Notifi: 'Notifi',
+  NotifiRead: 'NotifiRead',
+  Posts: 'Posts',
+  Product: 'Product',
+  Cart: 'Cart',
   Wishlist: 'Wishlist',
-  product_analytic: 'product_analytic',
-  product_variant: 'product_variant',
-  promo: 'promo',
-  promo_and_product: 'promo_and_product',
-  rating: 'rating',
-  revenue_analytic: 'revenue_analytic',
-  subcategory: 'subcategory'
+  ProductAnalytic: 'ProductAnalytic',
+  ProductVariant: 'ProductVariant',
+  Promo: 'Promo',
+  PromoAndProduct: 'PromoAndProduct',
+  Rating: 'Rating',
+  RevenueAnalytic: 'RevenueAnalytic',
+  Subcategory: 'Subcategory'
 };
 
 /**
