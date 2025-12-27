@@ -1,11 +1,13 @@
-import { Image } from "@unpic/react";
-import { HeartIcon, ShoppingCart, Star } from "lucide-react";
+import { Image } from "@unpic/react/nextjs";
+import { HeartIcon, Star } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import type { FunctionComponent } from "react";
 import { Card } from "@/components/ui/card";
 import type { ProductWithMedia } from "@/server/api/product/product-schema";
 import Link from "next/link";
+import CartDialog from "../cart/cart-dialog";
+import { blurhashToDataUri } from "@unpic/placeholder";
 interface ProductCardProps {
   product: ProductWithMedia;
 }
@@ -23,6 +25,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
             alt="Wireless Bluetooth Headphones"
             className="rounded-ele h-full w-full shrink-0 overflow-hidden object-cover"
             src={product.media[0]?.url ?? ""}
+            background={blurhashToDataUri(product.media[0]?.blur ?? "")}
             layout="constrained"
             width={600}
             height={600}
@@ -78,10 +81,15 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
             <Button size="icon" variant="outline">
               <HeartIcon />
             </Button>
-            <Button className="grow">
-              <ShoppingCart />
-              <span className="max-[324px]:hidden">Add to cart</span>
-            </Button>
+            <CartDialog
+              name={product.name}
+              discount={product.discount}
+              id={product.id}
+              discountedPrice={product.discountedPrice}
+              image={product.media[0]?.url ?? ""}
+              price={product.normalPrice}
+              variants={product.productVariant}
+            />
           </div>
         </div>
       </div>

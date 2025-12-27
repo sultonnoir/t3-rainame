@@ -77,6 +77,7 @@ export class ProductService {
               createdAt: "asc",
             },
           },
+          productVariant: true,
           _count: userId
             ? {
                 select: {
@@ -126,6 +127,11 @@ export class ProductService {
       include: {
         media: {
           take: 1,
+          orderBy: {
+            createdAt: "asc",
+          },
+        },
+        productVariant: {
           orderBy: {
             createdAt: "asc",
           },

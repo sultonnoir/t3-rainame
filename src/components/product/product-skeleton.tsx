@@ -13,7 +13,7 @@ const ProductSkeleton = ({ length = 6 }: Props) => {
           className="bg-muted/20 flex flex-col space-y-3 rounded-2xl p-2"
           key={index}
         >
-          <Skeleton className="h-[225px] rounded-xl" />
+          <Skeleton className="h-56.25 rounded-xl" />
           <div className="space-y-2">
             <Skeleton className="h-10" />
           </div>

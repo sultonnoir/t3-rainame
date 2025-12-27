@@ -1,4 +1,4 @@
-import { Search, ShoppingBag, UserIcon } from "lucide-react";
+import { Search, UserIcon } from "lucide-react";
 import { DesktopMenu } from "./desktop-menu";
 import { MobileMenu } from "./mobile-menu";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/input-group";
 import Logo from "./logo";
 import { api } from "@/trpc/server";
+import CartSidebar from "@/components/cart/cart-sidebar";
 
 export default async function MainNavbar() {
   const data = await api.category.getAll();
@@ -26,15 +27,7 @@ export default async function MainNavbar() {
               <Search />
             </InputGroupAddon>
           </InputGroup>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full"
-            aria-label="cart"
-            title="cart"
-          >
-            <ShoppingBag />
-          </Button>
+          <CartSidebar />
           <Button
             variant="ghost"
             size="icon"
