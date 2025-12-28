@@ -9,6 +9,7 @@ import {
 import Logo from "./logo";
 import { api } from "@/trpc/server";
 import CartSidebar from "@/components/cart/cart-sidebar";
+import { SearchForm } from "../form/search/search-form";
 
 export default async function MainNavbar() {
   const data = await api.category.getAll();
@@ -20,12 +21,7 @@ export default async function MainNavbar() {
           <DesktopMenu categories={data} />
         </div>
         <div className="flex items-center gap-2">
-          <InputGroup className="max-w-md">
-            <InputGroupInput placeholder="Search..." className="max-w-4xl" />
-            <InputGroupAddon>
-              <Search />
-            </InputGroupAddon>
-          </InputGroup>
+          <SearchForm />
           <CartSidebar />
           <MobileMenu categories={data} />
         </div>

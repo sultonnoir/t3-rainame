@@ -12,8 +12,8 @@ export const productFilterSchema = z.object({
   sortBy: z
     .enum(["price-high", "price-low", "rating", "hot-sale", "new-arrival"])
     .optional(),
-  page: z.number().min(1).default(1),
-  limit: z.number().min(1).max(100).default(20),
+  page: z.number().min(0).optional(),
+  limit: z.number().min(0).optional(),
 });
 
 export const productMetadataInput = z.object({
@@ -37,5 +37,25 @@ export type ProductFilter = z.infer<typeof productFilterSchema>;
 
 export type ProductWithMedia = Product & {
   media: Media[];
+};
+
+export interface ProductPageProp extends Product {
+  media: Media[];
   productVariant: ProductVariant[];
+}
+
+export type ProductPage = {
+  data: ProductWithMedia[];
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+};
+
+export type SearchProductsClient = {
+  params?: { category?: string; subcategory?: string };
+  title: string;
+  searchParams: ProductFilter;
 };

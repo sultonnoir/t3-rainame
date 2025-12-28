@@ -5,12 +5,13 @@ import ProductCounter from "./product-counter";
 import ProductPayment from "./product-payment";
 import ProductDetails from "./product-details";
 import ProductBenefit from "./product-benefit";
-import type { ProductWithMedia } from "@/server/api/product/product-schema";
+
 import ImageCarouselBasic from "../ui/image-carousel-basic";
 import StarRatingFractions from "../ui/star-rating-fractions";
+import type { ProductPageProp } from "@/server/api/product/product-schema";
 
 interface Props {
-  product: ProductWithMedia;
+  product: ProductPageProp;
 }
 
 const ProductPage = ({ product }: Props) => {

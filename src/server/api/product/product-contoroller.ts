@@ -7,8 +7,8 @@ const productService = new ProductService();
 export const productRouter = createTRPCRouter({
   getFilterProducts: publicProcedure
     .input(productFilterSchema)
-    .query(async ({ input, ctx }) => {
-      return await productService.filterProduct(input, ctx.session?.user.id);
+    .query(async ({ input }) => {
+      return await productService.filterProduct(input);
     }),
   getHomeProducts: publicProcedure
     .input(productFilterSchema)

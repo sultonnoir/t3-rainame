@@ -26,3 +26,9 @@ export function formatCardNumber(value: string): string {
   const digits = value.replace(/\D/g, "");
   return digits.slice(0, 16);
 }
+
+export function formatName(name: string): string {
+  // Regex: mencari "-" yang tidak diawali oleh huruf "t" atau "T"
+  // (?<![tT]) adalah lookbehind negatif
+  return name.replace(/(?<![tT])-/g, " ");
+}
