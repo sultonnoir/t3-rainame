@@ -5,12 +5,14 @@ import { ShoppingBag } from "lucide-react";
 import { useCount } from "@/hooks/use-count";
 import { useSizes } from "@/hooks/use-size";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 
 interface Props {
   productId: string;
 }
 
 const ProductPayment = ({ productId }: Props) => {
+  const { data: user } = authClient.useSession();
   const { count, reset } = useCount();
   const { sizes } = useSizes();
   const utils = api.useUtils();
@@ -25,11 +27,20 @@ const ProductPayment = ({ productId }: Props) => {
     },
   });
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!sizes) {
       toast.error("Please select size first");
       return;
     }
+
+    if (!user) {
+      const { error } = await authClient.signIn.anonymous();
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+    }
+
     mutate({
       productId,
       size: sizes.name,
