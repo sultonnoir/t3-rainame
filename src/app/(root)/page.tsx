@@ -6,6 +6,8 @@ import HomeCategory from "@/components/home/home-category";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import HomeEmailSubscription from "@/components/home/home-email-subscribe";
+import ProductClientFetch from "@/components/product/product-client-fetch";
+import { Banner_01, Banner_05 } from "@/components/home/home-banner";
 
 export default async function Home() {
   return (
@@ -19,10 +21,12 @@ export default async function Home() {
         />
         <HomeFeature />
         <HomeCategory />
-        <HomeProduct
+        <Banner_01 />
+        <Banner_05 />
+        <ProductClientFetch
           name="Best Deals"
           description="Don’t miss out on our best offers! Save big on top products with limited-time discounts."
-          sortBy="rating"
+          filter={{ sortBy: "rating", page: 1, limit: 8 }}
         />
         <div className="flex grow items-center justify-center">
           <Link href="/">

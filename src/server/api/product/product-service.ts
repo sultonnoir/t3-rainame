@@ -155,4 +155,28 @@ export class ProductService {
 
     return products;
   }
+
+  async getProductMeta(slug: string) {
+    const name = await db.product.findFirst({
+      where: {
+        slug,
+      },
+      select: {
+        name: true,
+      },
+    });
+    return name;
+  }
+
+  async getProductBySlug(slug: string) {
+    return await db.product.findFirst({
+      where: {
+        slug,
+      },
+      include: {
+        media: true,
+        productVariant: true,
+      },
+    });
+  }
 }

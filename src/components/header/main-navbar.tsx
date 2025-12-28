@@ -1,7 +1,6 @@
-import { Search, UserIcon } from "lucide-react";
+import { Search } from "lucide-react";
 import { DesktopMenu } from "./desktop-menu";
 import { MobileMenu } from "./mobile-menu";
-import { Button } from "@/components/ui/button";
 import {
   InputGroup,
   InputGroupAddon,
@@ -28,15 +27,6 @@ export default async function MainNavbar() {
             </InputGroupAddon>
           </InputGroup>
           <CartSidebar />
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full"
-            aria-label="profile"
-            title="profile"
-          >
-            <UserIcon />
-          </Button>
           <MobileMenu categories={data} />
         </div>
       </div>

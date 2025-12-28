@@ -16,6 +16,10 @@ export const productFilterSchema = z.object({
   limit: z.number().min(1).max(100).default(20),
 });
 
+export const productMetadataInput = z.object({
+  slug: z.string(),
+});
+
 export const sortBy = z
   .enum(["price-high", "price-low", "rating", "hot-sale", "new-arrival"])
   .default("new-arrival");
@@ -33,6 +37,5 @@ export type ProductFilter = z.infer<typeof productFilterSchema>;
 
 export type ProductWithMedia = Product & {
   media: Media[];
-  isWishlisted: boolean;
   productVariant: ProductVariant[];
 };
