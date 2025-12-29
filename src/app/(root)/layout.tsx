@@ -1,4 +1,5 @@
 import MainNavbar from "@/components/header/main-navbar";
+import Footer from "@/components/ui/footer";
 import { Toaster } from "@/components/ui/sonner";
 import React from "react";
 
@@ -7,6 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="relative">
       <MainNavbar />
       {children}
+      <Footer />
       <Toaster richColors position="bottom-left" />
     </div>
   );
