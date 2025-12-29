@@ -51,7 +51,7 @@ const ProductCounter = () => {
     };
 
   return (
-    <div className="group flex w-fit items-stretch rounded-md text-3xl font-semibold ring ring-zinc-200 transition-shadow focus-within:ring-2 focus-within:ring-blue-500 dark:ring-zinc-800">
+    <div className="group focus-within:ring-ring/50 flex w-fit items-stretch rounded-md text-3xl font-semibold ring ring-zinc-200 transition-shadow focus-within:ring-[3px]">
       <button
         aria-hidden
         tabIndex={-1}

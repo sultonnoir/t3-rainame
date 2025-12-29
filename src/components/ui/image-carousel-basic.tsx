@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import { blurhashToDataUri } from "@unpic/placeholder";
 
 type ThumbPropType = {
   selected: boolean;
@@ -31,6 +32,7 @@ type ThumbPropType = {
   onClick: () => void;
   imgUrl: string;
   title?: string;
+  blur: string;
 };
 
 const getAspectRatioClass = (ratio?: string) => {
@@ -49,7 +51,7 @@ const getAspectRatioClass = (ratio?: string) => {
 };
 
 const ImageContainer: React.FC<{
-  image: { url: string; title?: string };
+  image: { url: string; title?: string; blur: string };
   alt: string;
   fit?: "cover" | "contain" | "fill";
   aspectRatio?: string;
@@ -78,6 +80,7 @@ const ImageContainer: React.FC<{
             <Image
               src={image.url}
               alt={image.title ?? alt}
+              background={blurhashToDataUri(image.blur ?? "")}
               layout="fullWidth"
               className={cn(
                 "absolute inset-0 h-full w-full",
@@ -113,6 +116,7 @@ const ImageContainer: React.FC<{
                       <Image
                         src={image.url}
                         alt={image.title ?? "Full size"}
+                        background={blurhashToDataUri(image.blur ?? "")}
                         className={cn(
                           "max-h-[90vh] max-w-[90vw] object-contain",
                           classNameImage,
@@ -158,7 +162,7 @@ const ImageContainer: React.FC<{
 };
 
 const Thumb: React.FC<ThumbPropType> = (props) => {
-  const { imgUrl, index, onClick, selected, title } = props;
+  const { imgUrl, index, onClick, selected, title, blur } = props;
 
   return (
     <div
@@ -187,6 +191,7 @@ const Thumb: React.FC<ThumbPropType> = (props) => {
             alt={title ?? `Thumbnail ${index + 1}`}
             width={400}
             height={600}
+            background={blurhashToDataUri(blur ?? "")}
             className={cn("h-full w-full object-cover")}
           />
         </div>
@@ -198,6 +203,7 @@ const Thumb: React.FC<ThumbPropType> = (props) => {
 type CarouselImage = {
   title?: string;
   url: string;
+  blur: string;
 };
 
 type CarouselImages = CarouselImage[];
@@ -385,6 +391,7 @@ const ImageCarouselBasic: React.FC<ImageCarousel_BasicProps> = ({
                   index={index}
                   imgUrl={image.url}
                   title={image.title}
+                  blur={image.blur}
                 />
               ))}
             </div>
@@ -485,6 +492,7 @@ const ImageCarouselBasic: React.FC<ImageCarousel_BasicProps> = ({
                     index={index}
                     imgUrl={image.url}
                     title={image.title}
+                    blur={image.blur}
                   />
                 ))}
               </div>

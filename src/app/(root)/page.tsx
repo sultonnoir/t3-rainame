@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 import HomeEmailSubscription from "@/components/home/home-email-subscribe";
 import ProductClientFetch from "@/components/product/product-client-fetch";
 import { Banner_01, Banner_05 } from "@/components/home/home-banner";
+import { Label } from "@/components/ui/label";
 
 export default async function Home() {
   return (

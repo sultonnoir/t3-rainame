@@ -19,6 +19,7 @@ import { api } from "@/trpc/react";
 import { toast } from "sonner";
 import { Image } from "@unpic/react/nextjs";
 import { ShoppingCart } from "lucide-react";
+import { blurhashToDataUri } from "@unpic/placeholder";
 
 interface CartDialogProps {
   id: string;
@@ -28,6 +29,7 @@ interface CartDialogProps {
   discount: number;
   image: string;
   variants: ProductVariant[];
+  blur: string;
 }
 
 export default function CartDialog({
@@ -38,6 +40,7 @@ export default function CartDialog({
   discount,
   discountedPrice,
   price,
+  blur,
 }: CartDialogProps) {
   const { data: user } = authClient.useSession();
   const util = api.useUtils();
@@ -103,6 +106,7 @@ export default function CartDialog({
                 width={100}
                 height={150}
                 className="rounded-lg object-cover"
+                background={blurhashToDataUri(blur)}
               />
               <div className="flex flex-col gap-2">
                 <h2 className="max-w-25 truncate font-semibold text-nowrap">

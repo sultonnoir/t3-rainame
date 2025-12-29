@@ -8,12 +8,16 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { categories } from "@/lib/constans";
 import Link from "next/link";
 import { Checkbox } from "../ui/checkbox";
 import { useParams, useRouter } from "next/navigation";
+import type { Categories } from "@/server/api/category/category-schema";
 
-export const FilterCategories = () => {
+interface FilterCategoriesProps {
+  categories: Categories[];
+}
+
+export const FilterCategories = ({ categories }: FilterCategoriesProps) => {
   const router = useRouter();
   const { subcategory } = useParams();
   const [openCategoryId, setOpenCategoryId] = React.useState<string | null>(
@@ -38,7 +42,7 @@ export const FilterCategories = () => {
             <div className="my-2 flex items-center justify-between">
               <Link
                 prefetch
-                href={`/products/${item.name}`}
+                href={`/collections/${item.slug}`}
                 className="capitalize"
               >
                 {item.name}
@@ -59,7 +63,7 @@ export const FilterCategories = () => {
                   >
                     <Link
                       prefetch
-                      href={`/products/${item.name}/${subItem.name}`}
+                      href={`/collections/${item.slug}/${subItem.slug}`}
                       className="w-full text-sm font-normal capitalize"
                     >
                       {subItem.name}

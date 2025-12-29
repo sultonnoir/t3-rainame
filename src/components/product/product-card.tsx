@@ -16,7 +16,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
       <div className="rounded-ele relative aspect-square w-full overflow-hidden pb-4">
         <Image
           alt="Wireless Bluetooth Headphones"
-          className="rounded-ele h-full w-full shrink-0 overflow-hidden object-cover"
+          className="h-full w-full shrink-0 overflow-hidden rounded-lg object-cover"
           src={product.media[0]?.url ?? ""}
           background={blurhashToDataUri(product.media[0]?.blur ?? "")}
           layout="constrained"
@@ -50,11 +50,11 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
               <span className="text-muted-foreground text-xs">
                 ({product.ratingCount})
               </span>
-            </div>{" "}
+            </div>
           </div>
           <h3 className="line-clamp-2 truncate text-sm leading-tight font-semibold transition-colors duration-200 sm:text-base">
             <Link
-              href={`/product/${product.slug}`}
+              href={`/products/${product.slug}`}
               prefetch={true}
               title={product.name}
             >

@@ -104,14 +104,16 @@ const CartCard = ({ item, isAggregate, className }: Props) => {
             {item.product.name}
           </Link>
 
-          <Button
-            size="icon"
-            variant="ghost"
-            disabled={removeItem.isPending}
-            onClick={() => removeItem.mutate({ cartId: item.id })}
-          >
-            <XIcon />
-          </Button>
+          {isAggregate && (
+            <Button
+              size="icon"
+              variant="ghost"
+              disabled={removeItem.isPending}
+              onClick={() => removeItem.mutate({ cartId: item.id })}
+            >
+              <XIcon />
+            </Button>
+          )}
         </div>
 
         {/* meta */}

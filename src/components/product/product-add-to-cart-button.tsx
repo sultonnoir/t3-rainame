@@ -7,11 +7,11 @@ import { useSizes } from "@/hooks/use-size";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 
-interface Props {
+interface ProductAddToCartDialogProps {
   productId: string;
 }
 
-const ProductPayment = ({ productId }: Props) => {
+const ProductAddToCartDialog = ({ productId }: ProductAddToCartDialogProps) => {
   const { data: user } = authClient.useSession();
   const { count, reset } = useCount();
   const { sizes } = useSizes();
@@ -61,4 +61,4 @@ const ProductPayment = ({ productId }: Props) => {
   );
 };
 
-export default ProductPayment;
+export default ProductAddToCartDialog;

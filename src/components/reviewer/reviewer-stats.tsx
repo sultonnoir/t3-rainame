@@ -124,7 +124,7 @@ function ReviewerStats({
         </button>
         <form
           data-state={open ? "open" : "closed"}
-          className="flex max-w-xl flex-col space-y-5 overflow-hidden py-5 transition-all duration-300 data-[state=closed]:pointer-events-none data-[state=closed]:max-h-0 data-[state=closed]:opacity-0 data-[state=open]:max-h-250 data-[state=open]:opacity-100"
+          className="flex flex-col space-y-5 overflow-hidden px-2 py-5 transition-all duration-300 data-[state=closed]:pointer-events-none data-[state=closed]:max-h-0 data-[state=closed]:opacity-0 data-[state=open]:max-h-250 data-[state=open]:opacity-100"
         >
           <div className="flex flex-row items-center gap-4">
             <StarRatingFractions
@@ -134,6 +134,7 @@ function ReviewerStats({
             />
             <p>({rating})</p>
           </div>
+
           <InputGroup>
             <InputGroupInput
               id="username"
@@ -142,12 +143,10 @@ function ReviewerStats({
               placeholder="Enter your name"
             />
             <InputGroupAddon>
-              <InputGroupAddon>
-                <Label htmlFor="username">
-                  <span className="sr-only">username</span>
-                  <UserIcon />
-                </Label>
-              </InputGroupAddon>
+              <Label htmlFor="username">
+                <span className="sr-only">username</span>
+                <UserIcon size={16} />
+              </Label>
             </InputGroupAddon>
           </InputGroup>
           <InputGroup>
@@ -160,7 +159,7 @@ function ReviewerStats({
             <InputGroupAddon>
               <Label htmlFor="email">
                 <span className="sr-only">mail</span>
-                <MailIcon />
+                <MailIcon size={16} />
               </Label>
             </InputGroupAddon>
           </InputGroup>
@@ -170,11 +169,11 @@ function ReviewerStats({
               id="message"
               placeholder="Enter your message"
             />
-            <InputGroupAddon>
+            <InputGroupAddon align="block-start">
               <Label htmlFor="message">Message</Label>
             </InputGroupAddon>
           </InputGroup>
-          <div className="font-semibold">
+          <div className="text-sm font-semibold">
             <p>
               How we use your data: We’ll only contact you about the review you
               left, and only if necessary. By submitting your review, you agree

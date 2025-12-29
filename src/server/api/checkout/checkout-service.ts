@@ -24,11 +24,7 @@ export class CheckoutService {
       });
 
       if (activeCheckout) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message:
-            "There are still active checkouts that have not been completed.",
-        });
+        return activeCheckout.id;
       }
 
       const carts = await tx.cart.findMany({

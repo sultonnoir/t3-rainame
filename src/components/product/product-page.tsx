@@ -2,10 +2,9 @@
 import ProductPrice from "./product-price";
 import ProductSizes from "./product-size";
 import ProductCounter from "./product-counter";
-import ProductPayment from "./product-payment";
+import ProductAddToCartButton from "./product-add-to-cart-button";
 import ProductDetails from "./product-details";
 import ProductBenefit from "./product-benefit";
-
 import ImageCarouselBasic from "../ui/image-carousel-basic";
 import StarRatingFractions from "../ui/star-rating-fractions";
 import type { ProductPageProp } from "@/server/api/product/product-schema";
@@ -38,7 +37,7 @@ const ProductPage = ({ product }: Props) => {
         />
         <ProductSizes sizes={product.productVariant} />
         <ProductCounter />
-        <ProductPayment productId={product.id} />
+        <ProductAddToCartButton productId={product.id} />
         <ProductDetails about={product.desc} />
         <ProductBenefit />
       </div>
