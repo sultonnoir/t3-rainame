@@ -5,26 +5,30 @@ Rainame is a modern fashion e-commerce platform built with the T3 Stack, offerin
 ## 🚀 Features
 
 - **Modern UI/UX**: Built with Next.js 16, React 19, and Tailwind CSS for a responsive and beautiful interface
-- **Authentication**: Secure user authentication with Better Auth supporting GitHub OAuth
 - **Product Catalog**: Browse products by categories and subcategories with advanced filtering
 - **Shopping Cart**: Add products to cart with size selection and quantity management
-- **Wishlist**: Save favorite products for later purchase
 - **Checkout Process**: Complete checkout flow with order tracking
-- **User Dashboard**: Personalized user experience with purchase history and analytics
-- **Admin Features**: Product and category management capabilities
 - **Search & Filtering**: Advanced product search and filtering options
 - **Rating System**: Product rating and review system
-- **Notifications**: Real-time notifications for order updates
 - **Responsive Design**: Mobile-first design that works across all devices
+
+## 🧠 Engineering Decisions
+
+This project includes a dedicated document explaining
+key product and engineering trade-offs.
+
+👉 See **[docs/decisions.md](docs/decisions.md)**
 
 ## 🛠️ Tech Stack
 
 ### Core Framework
+
 - **[Next.js 16](https://nextjs.org/)** - React framework with App Router
 - **[React 19](https://react.dev/)** - Latest React with concurrent features
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
 
 ### Styling & UI
+
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
 - **[Radix UI](https://www.radix-ui.com/)** - Unstyled, accessible UI components
 - **[Shadcn/ui](https://ui.shadcn.com/)** - Beautiful component library
@@ -32,35 +36,34 @@ Rainame is a modern fashion e-commerce platform built with the T3 Stack, offerin
 - **[Lucide React](https://lucide.dev/)** - Beautiful icons
 
 ### Database & ORM
+
 - **[PostgreSQL](https://www.postgresql.org/)** - Robust relational database
 - **[Prisma](https://prisma.io/)** - Type-safe ORM with migrations
-- **Database Features**:
-  - User management with sessions
-  - Product catalog with categories
-  - Shopping cart and wishlists
-  - Order management and checkout
-  - Rating and review system
-  - Analytics and notifications
 
 ### Authentication
+
 - **[Better Auth](https://www.better-auth.com/)** - Modern authentication solution
 - **GitHub OAuth** - Social login integration
 - **Session Management** - Secure session handling
 
 ### State Management & Data Fetching
+
 - **[tRPC](https://trpc.io/)** - End-to-end typesafe APIs
 - **[TanStack Query](https://tanstack.com/query)** - Powerful data synchronization
 - **[Zustand](https://zustand-demo.pmnd.rs/)** - Lightweight state management
 
 ### Form Handling & Validation
+
 - **[React Hook Form](https://react-hook-form.com/)** - Performant forms
 - **[Zod](https://zod.dev/)** - TypeScript-first schema validation
 
 ### Image Optimization
+
 - **[Unpic](https://unpic.pics/)** - Universal image optimization
 - **Next.js Image** - Built-in image optimization
 
 ### Development Tools
+
 - **[ESLint](https://eslint.org/)** - Code linting
 - **[Prettier](https://prettier.io/)** - Code formatting
 - **[Bun](https://bun.sh/)** - Fast JavaScript runtime and package manager
@@ -103,52 +106,58 @@ t3-rainame/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/t3-rainame.git
    cd t3-rainame
    ```
 
 2. **Install dependencies**
+
    ```bash
    # Using bun (recommended)
    bun install
-   
+
    # Or using npm
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env
    ```
-   
+
    Update `.env` with your configuration:
+
    ```env
    # Database
    DATABASE_URL="postgresql://username:password@localhost:5432/rainame"
-   
+
    # Better Auth
    BETTER_AUTH_SECRET="your-secret-key"
    BETTER_AUTH_GITHUB_CLIENT_ID="your-github-client-id"
    BETTER_AUTH_GITHUB_CLIENT_SECRET="your-github-client-secret"
-   
+
    # Environment
    NODE_ENV="development"
    ```
 
 4. **Set up the database**
+
    ```bash
    # Generate Prisma client
    bun run db:generate
-   
+
    # Run migrations
    bun run db:migrate
-   
+
    # (Optional) Push schema changes in development
    bun run db:push
    ```
 
 5. **Start the development server**
+
    ```bash
    bun run dev
    ```
@@ -180,10 +189,8 @@ The application uses PostgreSQL with the following main entities:
 - **Categories** - Product categorization system
 - **Cart** - Shopping cart functionality
 - **Checkout** - Order processing and management
-- **Wishlist** - User wishlists
 - **Ratings** - Product review system
 - **Notifications** - User notifications
-- **Analytics** - User behavior tracking
 
 ## 🔐 Authentication
 
@@ -232,6 +239,7 @@ docker run -p 3000:3000 rainame
 ### Manual Deployment
 
 1. **Build the application**
+
    ```bash
    bun run build
    ```
