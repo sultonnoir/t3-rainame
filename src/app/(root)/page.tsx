@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { HomeHero } from "@/components/home/home-hero";
-import HomeProduct from "@/components/home/home-products";
 import { HomeFeature } from "@/components/home/home-feature";
 import HomeCategory from "@/components/home/home-category";
 import { Button } from "@/components/ui/button";
@@ -8,17 +7,16 @@ import { ArrowRight } from "lucide-react";
 import HomeEmailSubscription from "@/components/home/home-email-subscribe";
 import ProductClientFetch from "@/components/product/product-client-fetch";
 import { Banner_01, Banner_05 } from "@/components/home/home-banner";
-import { Label } from "@/components/ui/label";
 
 export default async function Home() {
   return (
     <main className="min-h-screen py-5">
       <HomeHero />
       <div className="container mx-auto space-y-10">
-        <HomeProduct
+        <ProductClientFetch
           name="Fresh & New"
           description="Check out our newest products that just dropped! Trendy designs and premium quality made for your unique style."
-          sortBy="new-arrival"
+          filter={{ sortBy: "new-arrival", page: 1, limit: 8 }}
         />
         <HomeFeature />
         <HomeCategory />
