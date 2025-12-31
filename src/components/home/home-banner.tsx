@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 enum Season {
@@ -72,13 +73,16 @@ function Banner_01() {
         <div
           className={`transition-all delay-300 duration-700 ${isLoaded ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
         >
-          <button className="group relative isolate overflow-hidden rounded-full bg-white px-8 py-3 font-medium text-blue-600 shadow-md transition-all hover:shadow-lg">
+          <Link
+            href="/collections"
+            className="group relative isolate overflow-hidden rounded-full bg-white px-8 py-3 font-medium text-blue-600 shadow-md transition-all hover:shadow-lg"
+          >
             <span className="absolute inset-0 h-full w-1/2 -translate-x-full transform bg-linear-to-r from-blue-400/20 via-transparent to-transparent transition-transform duration-300 group-hover:translate-x-full"></span>
             Shop Now
             <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
               →
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -144,12 +148,19 @@ function Banner_05() {
           </p>
 
           <div className="flex flex-col items-center justify-center space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-            <button className="hover:bg-opacity-90 rounded-md bg-white px-6 py-3 font-medium text-orange-500 transition-all">
+            <Link
+              href="/collections"
+              className="hover:bg-opacity-90 rounded-md bg-white px-6 py-3 font-medium text-orange-500 transition-all"
+            >
               Shop Summer Collection
-            </button>
-            <button className="border-opacity-40 hover:bg-opacity-10 rounded-md border border-white bg-transparent px-6 py-3 font-medium text-white transition-all hover:bg-white hover:text-orange-500">
+            </Link>
+            <Link
+              href="/collections"
+              prefetch
+              className="border-opacity-40 hover:bg-opacity-10 rounded-md border border-white bg-transparent px-6 py-3 font-medium text-white transition-all hover:bg-white hover:text-orange-500"
+            >
               View All Deals
-            </button>
+            </Link>
           </div>
 
           <div className="text-opacity-80 mt-4 text-center text-sm text-white">

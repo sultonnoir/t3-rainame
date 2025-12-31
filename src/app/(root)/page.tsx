@@ -28,14 +28,19 @@ export default async function Home() {
           filter={{ sortBy: "rating", page: 1, limit: 8 }}
         />
         <div className="flex grow items-center justify-center">
-          <Link href="/">
-            <Button className="group h-12 px-8" size="lg" variant="outline">
+          <Button
+            className="group h-12 px-8"
+            size="lg"
+            variant="outline"
+            asChild
+          >
+            <Link href="/collections">
               View All Products
               <ArrowRight
                 className={`ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1`}
               />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
       <div className="container mx-auto flex flex-col">
