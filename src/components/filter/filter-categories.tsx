@@ -72,7 +72,7 @@ export const FilterCategories = ({ categories }: FilterCategoriesProps) => {
                       className="size-5"
                       checked={subcategory === subItem.name}
                       onCheckedChange={() =>
-                        router.push(`/products/${item.slug}/${subItem.slug}`)
+                        router.push(`/collections/${item.slug}/${subItem.slug}`)
                       }
                     />
                   </div>
