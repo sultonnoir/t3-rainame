@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 
 function Footer() {
-  const [isDarkMode, setIsDarkMode] = React.useState(true);
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   React.useEffect(() => {
     if (isDarkMode) {
