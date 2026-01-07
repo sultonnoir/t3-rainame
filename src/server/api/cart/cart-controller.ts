@@ -27,4 +27,9 @@ export const cartRouter = createTRPCRouter({
     const cartItems = await cartService.getCart(ctx.session.user.id);
     return cartItems;
   }),
+  updateItemQuantity: protectedProcedure
+    .input(createCartFromUser)
+    .mutation(async ({ input, ctx }) => {
+      await cartService.updateCart({ ...input, userId: ctx.session.user.id });
+    }),
 });

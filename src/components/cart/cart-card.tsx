@@ -34,7 +34,7 @@ const CartCard = ({ item, isAggregate, className }: Props) => {
     },
   });
 
-  const updateQuantity = api.cart.create.useMutation({
+  const updateQuantity = api.cart.updateItemQuantity.useMutation({
     onSuccess: () => {
       void utils.cart.getItems.invalidate();
     },

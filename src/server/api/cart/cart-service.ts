@@ -13,7 +13,45 @@ export class CartService {
         },
       });
 
-      if (stock?.amount === 0) {
+      if (!stock || stock.amount === 0) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "product is empty",
+        });
+      }
+      await tx.cart.upsert({
+        where: {
+          userId_productId_size: {
+            userId,
+            productId,
+            size,
+          },
+        },
+        update: {
+          quantity: {
+            increment: quantity,
+          },
+        },
+        create: {
+          userId,
+          productId,
+          size,
+          quantity,
+        },
+      });
+    });
+  }
+  async updateCart(input: CreateCartInput) {
+    const { userId, productId, size, quantity } = input;
+    await db.$transaction(async (tx) => {
+      const stock = await tx.productVariant.findFirst({
+        where: {
+          productId: input.productId,
+          name: input.size,
+        },
+      });
+
+      if (!stock || stock.amount === 0) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "product is empty",
@@ -94,6 +132,9 @@ export class CartService {
             },
           },
         },
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
     const result = cartItems.map((item) => ({

@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <MainNavbar />
       {children}
       <Footer />
-      <Toaster richColors position="bottom-left" />
+      <Toaster richColors position="top-center" />
     </div>
   );
 };

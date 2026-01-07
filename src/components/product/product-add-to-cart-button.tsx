@@ -6,17 +6,19 @@ import { useCount } from "@/hooks/use-count";
 import { useSizes } from "@/hooks/use-size";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
+import { useState } from "react";
 
 interface ProductAddToCartDialogProps {
   productId: string;
 }
 
 const ProductAddToCartDialog = ({ productId }: ProductAddToCartDialogProps) => {
+  const [loading, setLoading] = useState(false);
   const { data: user } = authClient.useSession();
   const { count, reset } = useCount();
   const { sizes } = useSizes();
   const utils = api.useUtils();
-  const { isPending, mutate } = api.cart.create.useMutation({
+  const { mutate } = api.cart.create.useMutation({
     onSuccess: () => {
       reset();
       toast.success("Product added to cart!");
@@ -28,6 +30,7 @@ const ProductAddToCartDialog = ({ productId }: ProductAddToCartDialogProps) => {
   });
 
   const handleAddToCart = async () => {
+    setLoading(true);
     if (!sizes) {
       toast.error("Please select size first");
       return;
@@ -46,12 +49,13 @@ const ProductAddToCartDialog = ({ productId }: ProductAddToCartDialogProps) => {
       size: sizes.name,
       quantity: count,
     });
+    setLoading(false);
   };
   return (
     <div className="flex gap-2">
       <Button
         className="h-auto w-full gap-2"
-        disabled={isPending}
+        disabled={loading}
         onClick={handleAddToCart}
       >
         <ShoppingBag />
