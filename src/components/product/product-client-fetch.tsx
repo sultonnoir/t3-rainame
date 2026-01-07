@@ -1,6 +1,6 @@
 "use client";
 
-import { useInViewOnce } from "@/hooks/useI-in-view-once";
+import { useInViewOnce } from "@/hooks/use-in-view-once";
 import { api } from "@/trpc/react";
 import ProductSkeleton from "./product-skeleton";
 import ProductCard from "./product-card";

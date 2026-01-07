@@ -4,7 +4,7 @@ import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import { formatDate, formatDistanceToNowStrict } from "date-fns";
-import { useInViewOnce } from "@/hooks/useI-in-view-once";
+import { useInViewOnce } from "@/hooks/use-in-view-once";
 import ProductSkeleton from "../product/product-skeleton";
 import { Image } from "@unpic/react";
 
