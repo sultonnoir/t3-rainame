@@ -21,14 +21,34 @@ export function useCartItemQuantity({
   const [quantity, setQuantity] = useState(initialQuantity);
   const debouncedQuantity = useDebounce(quantity, 500);
   const [lastSyncedQuantity, setLastSyncedQuantity] = useState(initialQuantity);
+  const mutation = api.cart.updateItemQuantity.useMutation({
+    // ✅ OPTIMISTIC UPDATE
+    onMutate: async (input) => {
+      await utils.cart.getItems.cancel();
+      const previous = utils.cart.getItems.getData();
 
-  const mutation = api.cart.create.useMutation({
-    onSuccess: () => {
-      void utils.cart.getItems.invalidate();
+      utils.cart.getItems.setData(undefined, (old) => {
+        if (!old) return old;
+
+        return old.map((item) =>
+          item.product.id === input.productId && item.size === input.size
+            ? { ...item, quantity: input.quantity }
+            : item,
+        );
+      });
+
+      return { previous };
     },
-    onError: (error) => {
-      toast.error(error.message);
-      setQuantity(lastSyncedQuantity); // rollback optimistic UI
+
+    onError: (_err, _input, ctx) => {
+      if (ctx?.previous) {
+        utils.cart.getItems.setData(undefined, ctx.previous);
+      }
+      toast.error("Failed to update quantity");
+    },
+
+    onSettled: () => {
+      void utils.cart.getItems.invalidate();
     },
   });
 

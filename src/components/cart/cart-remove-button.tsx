@@ -10,12 +10,30 @@ interface Props {
 
 const CartRemoveButton = ({ cartId }: Props) => {
   const utils = api.useUtils();
+
   const { mutate, isPending } = api.cart.removeItem.useMutation({
-    onSuccess: () => {
+    onMutate: async ({ cartId }) => {
+      await utils.cart.getItems.cancel();
+
+      const previousItems = utils.cart.getItems.getData();
+
+      utils.cart.getItems.setData(undefined, (old) =>
+        old?.filter((item) => item.id !== cartId),
+      );
+
+      return { previousItems };
+    },
+    onError: (_err, _vars, ctx) => {
+      if (ctx?.previousItems) {
+        utils.cart.getItems.setData(undefined, ctx.previousItems);
+      }
+    },
+    onSettled: () => {
       void utils.cart.getItems.invalidate();
       toast.success("Item removed from cart");
     },
   });
+
   return (
     <Button
       size="icon"

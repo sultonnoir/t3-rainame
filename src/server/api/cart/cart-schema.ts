@@ -9,8 +9,8 @@ export const createCartSchema = z.object({
 
 export const createCartFromUser = z.object({
   productId: z.string(),
-  quantity: z.number().min(1).max(100).default(1),
-  size: z.string().min(1).max(100).default("S"),
+  quantity: z.number().min(1).max(100),
+  size: z.string().min(1).max(100),
 });
 
 export const deleteCartSchema = z.object({
